@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit — New Habit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #f8faff;
+            --white: #ffffff;
+            --border: #e8edf5;
+            --blue: #2563eb;
+            --blue-light: #eff4ff;
+            --blue-mid: #dbeafe;
+            --text: #0f172a;
+            --text2: #475569;
+            --muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 48px;
+            width: 100%;
+            max-width: 460px;
+            box-shadow: 0 4px 24px rgba(37,99,235,0.06);
+            animation: up 0.5s cubic-bezier(0.16,1,0.3,1) both;
+        }
+
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 32px;
+            transition: color 0.2s;
+        }
+        .back:hover { color: var(--blue); }
+
+        .logo {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--blue);
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 6px;
+        }
+
+        .sub {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        form p { margin-bottom: 18px; }
+
+        form p label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text2);
+            margin-bottom: 6px;
+            letter-spacing: 0.01em;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: var(--text);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--blue);
+            background: white;
+            box-shadow: 0 0 0 3px var(--blue-light);
+        }
+
+        textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--blue);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+            box-shadow: 0 1px 3px rgba(37,99,235,0.3);
+        }
+
+        .submit-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(37,99,235,0.4);
+        }
+
+        @keyframes up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <a href="{% url 'dashboard' %}" class="back">← Back to dashboard</a>
+
+    <div class="logo">habit.</div>
+    <h1>New Habit</h1>
+    <p class="sub">What do you want to do every day?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-btn">Create Habit →</button>
+    </form>
+</div>
+</body>
+</html>

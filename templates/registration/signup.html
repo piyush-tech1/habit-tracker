@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit — Sign Up</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #f8faff;
+            --white: #ffffff;
+            --border: #e8edf5;
+            --blue: #2563eb;
+            --blue-light: #eff4ff;
+            --text: #0f172a;
+            --text2: #475569;
+            --muted: #94a3b8;
+            --red: #ef4444;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 48px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 4px 24px rgba(37,99,235,0.06);
+            animation: up 0.5s ease both;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--blue);
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .sub {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 28px;
+        }
+
+        form p {
+            margin-bottom: 16px;
+        }
+
+        form p label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text2);
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--blue);
+            background: white;
+            box-shadow: 0 0 0 3px var(--blue-light);
+        }
+
+        .error {
+            color: var(--red);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--blue);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 6px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .bottom {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .bottom a {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @keyframes up {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="logo">habit.</div>
+
+    <h1>Create account</h1>
+    <p class="sub">Start building your daily habits.</p>
+
+    {% if form.errors %}
+        <div class="error">Please fix the errors below</div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Sign Up →</button>
+    </form>
+
+    <div class="bottom">
+        Already have an account?
+        <a href="{% url 'login' %}">Login</a>
+    </div>
+</div>
+
+</body>
+</html>
